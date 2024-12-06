@@ -70,6 +70,16 @@ const produtoAPI = {
             throw error;
         }
     },
+
+    async listarTiposCategoriasAsync() {
+        try {
+            const response = await HTTPClient.get(`/Produto/ListarTiposCategorias`);
+            return response.data; 
+        } catch (error) {
+            console.error("Erro ao listar tipos de categorias:", error);
+            throw error;
+        }
+    },
    
     async restaurarAsync(produtoId) {
         try {

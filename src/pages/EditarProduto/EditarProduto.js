@@ -14,7 +14,7 @@ export function EditarProduto() {
     const [nome, setNome] = useState('');
     const [quantidade, setQuantidade] = useState('');
     const [tiposCategoria, setTiposCategoria] = useState('');
-    const [tiposProdutos, setTiposProdutos] = useState([]);
+    const [categorias, setCategorias] = useState([]);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -28,13 +28,12 @@ export function EditarProduto() {
 
     useEffect(() => {
 
-        const buscarTiposProdutos = async () => {
+        const buscarCategorias = async () => {
             try {
-                const tipos = await produtoAPI.listarTiposProdutosAsync();
-                setTiposProdutos(tipos);
-                console.log(tiposProdutos)
+                const resposta = await produtoAPI.listarTiposCategoriasAsync();
+                setCategorias(resposta);
             } catch (error) {
-                console.error("Erro ao buscar tipos de produtos:", error);
+                console.error("Erro ao buscar categorias:", error);
             }
         };
 
@@ -50,7 +49,7 @@ export function EditarProduto() {
             }
         }
         buscarDadosProduto();
-        buscarTiposProdutos();
+        buscarCategorias();
 
     }, []);
 
@@ -59,57 +58,59 @@ export function EditarProduto() {
     };
 
     return (
-            <Topbar>
-                <div className={style.pagina_conteudo}>
-                    <h3>Editar Produto</h3>
+        <Topbar>
+            <div className={style.pagina_conteudo}>
+                <h3>Editar Produto</h3>
 
-                    <Form onSubmit={handleSubmit}>
-                        <Form.Group controlId="formNome" className="mb-3">
-                            <Form.Label>Nome</Form.Label>
-                            <Form.Control
-                                type="text"
-                                placeholder="Digite seu produto"
-                                name="nome"
-                                value={nome}
-                                onChange={(e) => setNome(e.target.value)}
-                                required
-                            />
-                        </Form.Group>
+                <Form onSubmit={handleSubmit}>
+                    <Form.Group controlId="formNome" className="mb-3">
+                        <Form.Label>Nome</Form.Label>
+                        <Form.Control
+                            type="text"
+                            placeholder="Digite seu produto"
+                            name="nome"
+                            value={nome}
+                            onChange={(e) => setNome(e.target.value)}
+                            required
+                        />
+                    </Form.Group>
 
-                        <Form.Group controlId="formEmail" className="mb-3">
-                            <Form.Label>Quantidade</Form.Label>
-                            <Form.Control
-                                type="text"
-                                placeholder="Digite sua quantidade"
-                                name="quantidade"
-                                value={quantidade}
-                                onChange={(e) => setQuantidade(e.target.value)}
-                                required
-                            />
-                        </Form.Group>
+                    <Form.Group controlId="formEmail" className="mb-3">
+                        <Form.Label>Quantidade</Form.Label>
+                        <Form.Control
+                            type="text"
+                            placeholder="Digite sua quantidade"
+                            name="quantidade"
+                            value={quantidade}
+                            onChange={(e) => setQuantidade(e.target.value)}
+                            required
+                        />
+                    </Form.Group>
 
-                        <Form.Group controlId="formEmail" className="mb-3">
-                            <Form.Label>Categoria</Form.Label>
-                            <Form.Control
-                                as="select"
-                                name="tiposCategoria"
-                                value={tiposCategoria}
-                                onChange={(e) => setTiposCategoria(e.target.value)}
-                                required
-                            >
-                                {tiposProdutos.map((tipo) => (
-                                        <option value={tipo.id}>{tipo.nome}</option>
-                                
-                                ))}
-                            </Form.Control>
-                        </Form.Group>
+                    <Form.Group controlId="formEmail" className="mb-3">
+                        <Form.Label>Categoria</Form.Label>
+                        <Form.Control
+                            as="select"
+                            name="tiposCategoria"
+                            value={tiposCategoria}
+                            onChange={(e) => setTiposCategoria(e.target.value)}
+                            required
+                        >
+                            {categorias.map((categoria) => (
+                                <option key={categoria.id} value={categoria.id}>
+                                    {categoria.nome}
+                                </option>
+
+                            ))}
+                        </Form.Control>
+                    </Form.Group>
 
 
-                        <Button variant="primary" type="submit" disabled={!isFormValid()}>
-                            Salvar
-                        </Button>
-                    </Form>
-                </div>
-            </Topbar>
+                    <Button variant="primary" type="submit" disabled={!isFormValid()}>
+                        Salvar
+                    </Button>
+                </Form>
+            </div>
+        </Topbar>
     )
 }
