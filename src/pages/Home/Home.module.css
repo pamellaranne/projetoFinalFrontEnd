@@ -1,37 +1,28 @@
-.pagina_conteudo {
-    width: 100%;
-    height: 100%;
-    padding: 10px;
-}
-
 .container {
     background-color: #fff;
     padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     width: 100%;
-    max-width: 600px;
+    height: 100%;
     text-align: center;
 }
 
-.welcome-message {
-    font-size: 1.2rem;
-    color: #333;
-    animation: fadeOut 3s forwards;
+.welcome_message h1{
+    margin-top: 1rem;
 }
 
-.main-content {
-    margin-top: 20px;
-    text-align: center;
-    display: none; /* Esconde o conteúdo inicial */
+.main_content, .welcome_message {
+    background-image: url('../../assets/lista.png'); 
+    background-size: cover; /* Faz a imagem cobrir todo o contêiner */
+    background-position: center; /* Centraliza a imagem */
+    display: flex;
+    color: #070b3b;
+    flex-direction: column; /* Organiza os elementos em uma coluna */
+    justify-content: center; /* Centraliza o conteúdo verticalmente */
+    align-items: center; /* Centraliza o conteúdo horizontalmente */
+    height: 100vh; /* Faz o contêiner ocupar toda a altura da tela */
+    text-align: center; /* Alinha o texto ao centro */
 }
 
-@keyframes fadeOut {
-    0% {
-        opacity: 1;
-    }
-    100% {
-        opacity: 0;
-        display: none;
-    }
+.imagemLista {
+    display: none; /* Opcional: caso queira esconder a imagem original */
 }

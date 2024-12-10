@@ -17,7 +17,7 @@
 }
 
 .botao_editar svg:hover{
-    color: #ac780898;
+    color: #070b3b;
 }
 
 .botao_deletar{
@@ -43,7 +43,7 @@
         padding-right: 20px;
 
         border-radius: 10px;
-        background-color: #ac780898;
+        background-color: #070b3b;
     }
 
 }
