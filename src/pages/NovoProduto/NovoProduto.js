@@ -26,11 +26,13 @@ export function NovoProduto() {
         fetchCategorias();
     }, []);
 
+    const usuarioId = 1;
+
     const handleSubmit = async (e) => {
         e.preventDefault();
 
         if (isFormValid()) {
-            await produtoAPI.criarAsync(nome, quantidade, tipoCategoria);
+            await produtoAPI.criarAsync(nome, quantidade, tipoCategoria, usuarioId);
             navigate('/produtos')
         } else {
             alert("Por favor, preencha todos os campos.");

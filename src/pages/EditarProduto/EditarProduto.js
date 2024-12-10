@@ -16,11 +16,13 @@ export function EditarProduto() {
     const [tiposCategoria, setTiposCategoria] = useState('');
     const [categorias, setCategorias] = useState([]);
 
+    const usuarioId = 1;
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         if (isFormValid()) {
-            await produtoAPI.atualizarAsync(id, nome, quantidade, tiposCategoria);
-            navigate('/produto')
+            await produtoAPI.atualizarAsync(id, nome, quantidade, tiposCategoria, usuarioId);
+            navigate('/produtos')
         } else {
             alert("Por favor, preencha todos os campos.");
         }

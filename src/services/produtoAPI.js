@@ -22,10 +22,11 @@ const produtoAPI = {
     },
     async criarAsync(nome, quantidade, tiposCategoria, usuarioId) {
         try {
+            const tiposCategoriaConvertida = parseInt(tiposCategoria, 10);
             const produtoCriar = {
                 Nome: nome,
                 Quantidade: quantidade,
-                TiposCategoria: tiposCategoria,
+                TiposCategoriasId: tiposCategoriaConvertida,
                 UsuarioId: usuarioId
             };
             const response = await HTTPClient.post(`/Produto/Criar`, produtoCriar);
@@ -37,11 +38,12 @@ const produtoAPI = {
     },
     async atualizarAsync(id, nome, quantidade, tiposCategoria, usuarioId) {
         try {
+            const tiposCategoriaConvertida = parseInt(tiposCategoria, 10);
             const produtoAtualizar = {
                 Id: id,
                 Nome: nome,
                 Quantidade: quantidade,
-                TiposCategoria: tiposCategoria,
+                TiposCategoriasId: tiposCategoriaConvertida,
                 UsuarioId: usuarioId
             };
             console.log(produtoAtualizar);
