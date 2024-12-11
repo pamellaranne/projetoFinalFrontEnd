@@ -13,11 +13,25 @@ export function Produtos() {
     const [produtos, setProdutos] = useState([]);
     const [mostrarModal, setMostrarModal] = useState(false);
     const [produtoSelecionado, setProdutoSelecionado] = useState(null);
+    const [categorias, setCategorias] = useState([]);
 
     const handleClickDeletar = (produto) => {
         setProdutoSelecionado(produto)
         setMostrarModal(true);
     };
+
+    async function carregarCategorias() {
+        try {
+            const listaCategorias = await produtoAPI.listarTiposCategoriasAsync(); 
+            setCategorias(listaCategorias);
+        } catch (error) {
+            console.error("Erro ao carregar categorias:", error);
+        }
+    }
+
+    useEffect(() => {
+        carregarCategorias();
+    }, []);
 
     const handleDeletar = async () => {
         try {
@@ -50,30 +64,35 @@ export function Produtos() {
     }, []);
 
     return (
-            <Topbar>
-                <div className={style.pagina_conteudo}>
-                    <div className={style.pagina_cabecalho}>
-                        <h3>Produtos</h3>
-                        <Link to='/produtos/novo' className={style.botao_novo}>+ Novo</Link>
-                    </div>
+        <Topbar>
+            <div className={style.pagina_conteudo}>
+                <div className={style.pagina_cabecalho}>
+                    <h3>Produtos</h3>
+                    <Link to='/produtos/novo' className={style.botao_novo}>+ Novo</Link>
+                </div>
 
-                    <div className={style.tabela}>
-                        {/* tabela fica responsiva automaticamente */}
-                        <Table responsive>
-                            <thead className={style.tabela_cabecalho}>
-                                <tr>
-                                    <th>Nome</th>
-                                    <th>Quantidade</th>
-                                    <th>Categoria</th>
-                                    <th>Ações</th>
-                                </tr>
-                            </thead>
-                            <tbody className={style.tabela_corpo}>
-                                {produtos.map((produto) => (
+                <div className={style.tabela}>
+                    {/* tabela fica responsiva automaticamente */}
+                    <Table responsive>
+                        <thead className={style.tabela_cabecalho}>
+                            <tr>
+                                <th>Nome</th>
+                                <th>Quantidade</th>
+                                <th>Categoria</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody className={style.tabela_corpo}>
+                            {produtos.map((produto) => {
+                                console.log("Produto:", produto); 
+                                // Encontre a categoria correspondente ao ID
+                                const categoria = categorias.find(c => c.id === produto.tiposCategoriasId);
+                                console.log("Categoria:", categoria);
+                                return (
                                     <tr key={produto.id}>
                                         <td>{produto.nome}</td>
                                         <td>{produto.quantidade}</td>
-                                        <td>{produto.tiposCategoriasId}</td>
+                                        <td>{categoria ? categoria.nome : "Categoria não encontrada"}</td>
                                         <td>
                                             <Link to='/produtos/editar' state={produto.id} className={style.botao_editar}>
                                                 <MdEdit />
@@ -83,28 +102,30 @@ export function Produtos() {
                                             </button>
                                         </td>
                                     </tr>
-                                ))}
-                            </tbody>
-                        </Table>
-                    </div>
+                                );
+                            })}
+                        </tbody>
 
-                    <Modal show={mostrarModal} onHide={handleFecharmodal}>
-                        <Modal.Header closeButton>
-                            <Modal.Title>Confirmar</Modal.Title>
-                        </Modal.Header>
-                        <Modal.Body>
-                            Tem certeza que deseja deletar o produto {produtoSelecionado?.nome}?
-                        </Modal.Body>
-                        <Modal.Footer>
-                            <Button variant="secondary" onClick={handleFecharmodal}>
-                                Cancelar
-                            </Button>
-                            <Button variant="danger" onClick={handleDeletar}>
-                                Deletar
-                            </Button>
-                        </Modal.Footer>
-                    </Modal>
+                    </Table>
                 </div>
-            </Topbar>
+
+                <Modal show={mostrarModal} onHide={handleFecharmodal}>
+                    <Modal.Header closeButton>
+                        <Modal.Title>Confirmar</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                        Tem certeza que deseja deletar o produto {produtoSelecionado?.nome}?
+                    </Modal.Body>
+                    <Modal.Footer>
+                        <Button variant="secondary" onClick={handleFecharmodal}>
+                            Cancelar
+                        </Button>
+                        <Button variant="danger" onClick={handleDeletar}>
+                            Deletar
+                        </Button>
+                    </Modal.Footer>
+                </Modal>
+            </div>
+        </Topbar>
     )
 }

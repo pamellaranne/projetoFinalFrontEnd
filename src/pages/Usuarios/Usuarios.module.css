@@ -1,49 +1,159 @@
-.pagina_conteudo{
+.pagina_conteudo {
     width: 100%;
     height: 100%;
-
     padding: 50px;
+    background: linear-gradient(135deg, #f5f7fa, #c3cfe2); 
+    font-family: 'Roboto', sans-serif; 
+    box-sizing: border-box;
 }
 
-.tabela{
-    margin-top: 30px;
-}
-
-.tabela_corpo svg{
-    color: #212529;
-
-    margin: 5px;
-    font-size: 25px;
-}
-
-.botao_editar svg:hover{
-    color: #070b3b;
-}
-
-.botao_deletar{
-    border: none;
-    background: none;
-
-    & svg:hover{
-        color: #e4604b;
-    }
-}
-
-.pagina_cabecalho{
+.pagina_cabecalho {
     display: flex;
     justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    border-bottom: 3px solid #007bff;
+    padding-bottom: 20px;
+}
 
-    & .botao_novo{
-        text-decoration: none;
+.pagina_cabecalho h3 {
+    font-size: 28px;
+    font-weight: bold;
+    color: #1e1e1e; 
+}
 
-        color: white;
+.botao_novo {
+    text-decoration: none;
+    color: white;
+    padding: 12px 24px;
+    background-color: #6200ea; 
+    border-radius: 50px; 
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
+    transition: background-color 0.3s, transform 0.2s, box-shadow 0.3s;
+}
 
-        padding: 10px;
-        padding-left: 20px;
-        padding-right: 20px;
+.botao_novo:hover {
+    background-color: #3700b3; 
+    transform: scale(1.05); /* Efeito de zoom */
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2); 
+}
 
-        border-radius: 10px;
-        background-color: #070b3b;
-    }
+.tabela {
+    margin-top: 40px;
+    overflow-x: auto;
+}
 
+.tabela thead {
+    background-color: #ffffff; 
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1); 
+}
+
+.tabela th {
+    text-align: left;
+    padding: 20px;
+    font-size: 16px;
+    font-weight: 600;
+    color: #555;
+    letter-spacing: 0.5px;
+}
+
+.tabela td {
+    padding: 20px;
+    font-size: 15px;
+    color: #333;
+    border-bottom: 1px solid #eee; 
+    background-color: #fafafa; 
+    transition: background-color 0.3s ease;
+}
+
+.tabela tr:hover {
+    background-color: #e9f5ff; 
+}
+
+.tabela_corpo svg {
+    color: #6200ea; 
+    font-size: 22px;
+    transition: color 0.3s ease, transform 0.2s ease;
+}
+
+.tabela_corpo svg:hover {
+    color: #3700b3; 
+    transform: scale(1.1); /* Efeito de zoom nos ícones */
+}
+
+.botao_editar {
+    color: #6200ea;
+    transition: color 0.3s ease, transform 0.2s ease;
+}
+
+.botao_editar:hover {
+    color: #3700b3; 
+    transform: scale(1.1);
+}
+
+.botao_deletar {
+    border: none;
+    background: none;
+    color: #e4604b; 
+    transition: color 0.3s ease, transform 0.2s ease;
+    cursor: pointer;
+}
+
+.botao_deletar:hover {
+    color: #d6336c; 
+    transform: scale(1.1); /* Efeito de zoom no ícone de deletar */
+}
+
+.modal-content {
+    border-radius: 12px;
+    background: #ffffff;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1); 
+    border: none;
+}
+
+.modal-header {
+    background-color: #f1f1f1;
+    border-bottom: 2px solid #ddd;
+}
+
+.modal-title {
+    font-size: 20px;
+    font-weight: 600;
+    color: #333;
+}
+
+.modal-body {
+    font-size: 16px;
+    color: #666;
+}
+
+button.btn-secondary {
+    background-color: #aaa;
+    color: white;
+    border-radius: 25px;
+    font-weight: 500;
+    padding: 8px 24px;
+    transition: background-color 0.3s, transform 0.2s ease;
+}
+
+button.btn-secondary:hover {
+    background-color: #888;
+    transform: scale(1.05);
+}
+
+button.btn-danger {
+    background-color: #e4604b;
+    color: white;
+    border-radius: 25px;
+    font-weight: 500;
+    padding: 8px 24px;
+    transition: background-color 0.3s, transform 0.2s ease;
+}
+
+button.btn-danger:hover {
+    background-color: #d6336c;
+    transform: scale(1.05);
 }

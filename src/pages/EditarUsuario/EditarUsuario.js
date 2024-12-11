@@ -13,13 +13,14 @@ export function EditarUsuario() {
 
     const [nome, setNome] = useState('');
     const [email, setEmail] = useState('');
+    const [senha, setSenha] = useState('');
     const [tipoUsuario, setTipoUsuario] = useState();
     const [tiposUsuarios, setTiposUsuarios] = useState([]);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         if (isFormValid()) {
-            await usuarioAPI.atualizarAsync(id, nome, email, tipoUsuario);
+            await usuarioAPI.atualizarAsync(id, nome, email, senha, tipoUsuario);
             navigate('/usuario')
         } else {
             alert("Por favor, preencha todos os campos.");
@@ -44,6 +45,7 @@ export function EditarUsuario() {
                 setTipoUsuario(usuario?.tipoUsuarioId);
                 setNome(usuario.nome)
                 setEmail(usuario.email)
+                setSenha(usuario.senha)
 
             } catch (error) {
                 console.error("Erro ao buscar dados do usuário:", error);
@@ -55,7 +57,7 @@ export function EditarUsuario() {
     }, []);
 
     const isFormValid = () => {
-        return nome && email;
+        return nome && email && senha;
     };
 
     return (
@@ -88,6 +90,17 @@ export function EditarUsuario() {
                             />
                         </Form.Group>
 
+                        <Form.Group controlId="formNome" className="mb-3">
+                            <Form.Label>Senha</Form.Label>
+                            <Form.Control
+                                type="password"
+                                placeholder="Digite sua senha"
+                                name="senha"
+                                value={senha}
+                                onChange={(e) => setSenha(e.target.value)}
+                                required
+                            />
+                        </Form.Group>
 
                         <Button variant="primary" type="submit" disabled={!isFormValid()}>
                             Salvar

@@ -36,13 +36,14 @@ const usuarioAPI = {
             throw error;
         }
     },
-    async atualizarAsync(id, nome, email, tipoUsuarioId) {
+    async atualizarAsync(id, nome, email, senha, tipoUsuarioId) {
         try {
             const tipoUsuarioConvertido = parseInt(tipoUsuarioId, 10);
             const usuarioAtualizar = {
                 Id: id,
                 Nome: nome,
                 Email: email,
+                Senha: senha,
                 TipoUsuarioId: tipoUsuarioConvertido
             };
             console.log(usuarioAtualizar);
