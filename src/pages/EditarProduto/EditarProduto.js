@@ -17,6 +17,8 @@ export function EditarProduto() {
     const [categorias, setCategorias] = useState([]);
 
     const usuarioId = 1;
+// localStorage.setItem("usuarioId",usuarioId )
+// const idi= localStorage.getItem("usuarioId")
 
     const handleSubmit = async (e) => {
         e.preventDefault();
