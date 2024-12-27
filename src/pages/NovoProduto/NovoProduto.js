@@ -26,7 +26,7 @@ export function NovoProduto() {
         fetchCategorias();
     }, []);
 
-    const usuarioId = 1;
+    const usuarioId = localStorage.getItem("usuarioId");
 
     const handleSubmit = async (e) => {
         e.preventDefault();

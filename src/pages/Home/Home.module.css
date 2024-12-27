@@ -1,28 +1,37 @@
-.container {
-    background-color: #fff;
-    padding: 20px;
+.conteudo{
     width: 100%;
-    height: 100%;
-    text-align: center;
+    height: 100vh;
+    
+    
 }
-
-.welcome_message h1{
-    margin-top: 1rem;
-}
-
-.main_content, .welcome_message {
-    background-image: url('../../assets/lista.png'); 
-    background-size: cover; /* Faz a imagem cobrir todo o contêiner */
-    background-position: center; /* Centraliza a imagem */
+.container {
+    background-color: #070b3b;
+    width: 100%;
+    height: 100vh;
     display: flex;
-    color: #070b3b;
-    flex-direction: column; /* Organiza os elementos em uma coluna */
-    justify-content: center; /* Centraliza o conteúdo verticalmente */
-    align-items: center; /* Centraliza o conteúdo horizontalmente */
-    height: 100vh; /* Faz o contêiner ocupar toda a altura da tela */
-    text-align: center; /* Alinha o texto ao centro */
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+       
 }
 
-.imagemLista {
-    display: none; /* Opcional: caso queira esconder a imagem original */
+.imagem{
+    width: 90%;
+    border-radius: 12px;
 }
+
+
+.main_content {
+    display: flex;
+    color: white;
+    flex-direction: column; /* Organiza os elementos em uma coluna */
+    justify-content: left; /* Centraliza o conteúdo verticalmente */
+    align-items: left;
+    text-align: left;
+    padding: 0 40px;
+    gap: 20px;
+    width: 70%;
+}
+
+

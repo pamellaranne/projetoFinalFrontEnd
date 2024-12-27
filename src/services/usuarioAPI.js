@@ -20,14 +20,14 @@ const usuarioAPI = {
             throw error;
         }
     },
-    async criarAsync(nome, email, senha, tipoUsuarioId) {
+    async criarAsync(nome, email, senha) {
         try {
-            const tipoUsuarioConvertido = parseInt(tipoUsuarioId, 10);
+            //const tipoUsuarioConvertido = parseInt(tipoUsuarioId, 10);
             const usuarioCriar = {
                 Nome: nome,
                 Email: email,
                 Senha: senha,
-                TipoUsuarioId: tipoUsuarioConvertido
+                //TipoUsuarioId: tipoUsuarioConvertido
             };
             const response = await HTTPClient.post(`/Usuario/Criar`, usuarioCriar);
             return response.data;
@@ -36,15 +36,15 @@ const usuarioAPI = {
             throw error;
         }
     },
-    async atualizarAsync(id, nome, email, senha, tipoUsuarioId) {
+    async atualizarAsync(id, nome, email, senha) {
         try {
-            const tipoUsuarioConvertido = parseInt(tipoUsuarioId, 10);
+            //const tipoUsuarioConvertido = parseInt(tipoUsuarioId, 10);
             const usuarioAtualizar = {
                 Id: id,
                 Nome: nome,
                 Email: email,
                 Senha: senha,
-                TipoUsuarioId: tipoUsuarioConvertido
+                //TipoUsuarioId: tipoUsuarioConvertido
             };
             console.log(usuarioAtualizar);
             const response = await HTTPClient.put(`/Usuario/Atualizar`, usuarioAtualizar);
@@ -100,13 +100,23 @@ const usuarioAPI = {
             const usuario = {
                 Email: email,
                 Senha: senha
-            }    
+            }
             const response = await HTTPClient.post(`/Usuario/Login/`, usuario);
+            
             return response.data;
+
         } catch (error) {
-            console.error("Erro ao restaurar usuário:", error);
+
+
+            console.error("Erro ao validar usuário:", error);
+            alert("Usuario ou senha incorreta")
             throw error;
         }
     },
+
+    async esqueciMinhaSenha(email) {
+        const response = await HTTPClient.post('/usuario/EsqueciMinhaSenha', { email });
+        return response.data;
+      }
 }
- export default usuarioAPI;
+export default usuarioAPI;

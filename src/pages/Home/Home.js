@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Topbar } from '../../componentes/Topbar/Topbar';
 import style from './Home.module.css';
-import logo from '../../assets/logo.png';
+import imgLista from'../../assets/lista.png'; 
 
 export function Home() {
     // Estado para controlar o que deve ser mostrado
@@ -26,13 +26,9 @@ export function Home() {
             <div className={style.container}>
                 {/* Mensagem de boas-vindas */}
                 {!showMainContent && (
-                    <div className={style.welcome_message}>
-                        <h1>Bem-vindo ao seu Gerenciador de Compras!</h1>
-                        <br></br>
-                        <br></br>
-                        <h3>Estamos felizes em ter você aqui.</h3>
-                        <br></br>
-                        <img src={logo} alt="logo" />
+                    <div className={style.main_content}>
+                        <h2>Bem-vindo ao seu Gerenciador de Compras!</h2>
+                        <h2>Estamos felizes em ter você aqui.</h2>
                     </div>
                 )}
 
@@ -40,13 +36,15 @@ export function Home() {
                 {showMainContent && (
                     <div className={style.main_content}>
                         <h2>Adicione seus itens à lista e organize suas compras de forma fácil e rápida.</h2>
-                        <br></br>
-                        <br></br>
                         <h2>Vamos começar?</h2>
-                        <br></br>
-                        <img src={logo} alt="logo" />
                     </div>
                 )}
+
+                
+                    <div className={style.container_imagem}>
+                    <img className={style.imagem} src={imgLista}></img>
+                    </div>
+                
             </div>
         </div>
     );

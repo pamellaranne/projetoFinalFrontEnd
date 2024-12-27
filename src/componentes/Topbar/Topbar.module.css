@@ -16,10 +16,7 @@
     display: flex;
 }
 
-.pagina_conteudo {
-    margin-top: 10vh;
-    padding: 10px;
-}
+
 
 .botao_nav {
     text-decoration: none;
@@ -41,3 +38,5 @@
     display: flex;
     align-items: center;
 }
+
+

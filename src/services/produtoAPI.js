@@ -11,9 +11,9 @@ const produtoAPI = {
             throw error;
         }
     },
-    async listarAsync(ativos) {
+    async listarAsync(ativos, usuarioId) {
         try {
-            const response = await HTTPClient.get(`/Produto/Listar?ativos=${ativos}`);
+            const response = await HTTPClient.get(`/Produto/Listar/${usuarioId}?ativos=${ativos}`);
             return response.data;
         } catch (error) {
             console.error("Erro ao listar produtos:", error);

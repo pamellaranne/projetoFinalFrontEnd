@@ -8,6 +8,8 @@ import { EditarProduto } from './pages/EditarProduto/EditarProduto';
 import { NovoProduto } from './pages/NovoProduto/NovoProduto';
 import { Login } from './pages/Login/Login';
 import { Produtos } from './pages/Produtos/Produtos';
+import { RecuperarSenha } from './pages/RecuperarSenha/RecuperarSenha';
+import { Cadastro } from './pages/Cadastro/Cadastro';
 
 function App() {
   return (
@@ -21,6 +23,8 @@ function App() {
         <Route path='/produtos' element={<Produtos />} />
         <Route path='/produtos/novo' element={<NovoProduto />} />
         <Route path='/produtos/editar' element={<EditarProduto />} />
+        <Route path='/recuperar-senha' element={<RecuperarSenha />} />
+        <Route path='/cadastro' element={<Cadastro />} />
       </Routes>
     </BrowserRouter>
   );

@@ -1,43 +1,60 @@
 import React, { useState } from 'react';
 import style from './LoginForm.module.css';
-import UsuarioAPI from '../../services/usuarioAPI';
+import UsuarioAPI from '../../services/usuarioAPI';  // Importa a API de usuários
 import { useNavigate } from 'react-router-dom';
 
 function LoginForm() {
   const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState('');  // Estado para armazenar mensagens de erro
-  const [loading, setLoading] = useState(false);  // Estado para mostrar carregando enquanto valida
-  
+  const [senha, setSenha] = useState('');
+  const [error, setError] = useState('');  // Estado para mensagens de erro
+  const [loading, setLoading] = useState(false);  // Controle de carregamento
+
   const navigate = useNavigate();
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
-    // Limpar mensagens de erro anteriores
-    setError('');
+    // Verifica se os campos estão preenchidos
+    if (!email || !senha) {
+      setError("Por favor, preencha ambos os campos.");
+      return;
+    }
 
-    setLoading(true); // Ativa o estado de carregamento
+    setLoading(true);  // Inicia o carregamento
 
     try {
-      // Chama a função de validação do usuário, aguardando a resposta
-      const resposta = await UsuarioAPI.validarUsuarioAsync(email, password);
+      // Faz a requisição à API de validação
+      const response = await UsuarioAPI.validarUsuarioAsync(email, senha);
+      console.log(response.id);  // Adicionado para depuração
 
-      // Se a resposta for bem-sucedida, redireciona o usuário
-      if (resposta.status === 200) {
-        navigate('/'); // Navega para a página inicial
-      } else {
-        // Se a resposta não for 200, trata como erro
-        setError('Credenciais inválidas.');
+      // Verifica se a resposta foi bem-sucedida
+      if (response !== null ) {
+        // Armazena no localStorage como usuário autenticado
+        localStorage.setItem('isAuthenticated', 'true');
+
+        
+        const usuarioId = response.id;
+
+        localStorage.setItem('usuarioId',usuarioId );
+        // Redireciona para a página principal
+        navigate('/');
       }
     } catch (error) {
-      // Se ocorrer um erro durante a requisição
-      console.error('Erro ao validar login:', error);
-      setError('Ocorreu um erro ao tentar fazer login. Tente novamente.');
+      console.error("Erro ao validar usuário:", error);
+      
     } finally {
-      setLoading(false); // Desativa o estado de carregamento
+      setLoading(false);  // Finaliza o carregamento
     }
-  }
+  };
+
+  // Funções de navegação para outras páginas
+  const handleEsqueceuSenha = () => {
+    navigate('/recuperar-senha');
+  };
+
+  const handleNovoUsuario = () => {
+    navigate('/cadastro');
+  };
 
   return (
     <div className={style.container}>
@@ -59,8 +76,8 @@ function LoginForm() {
           <input
             type="password"
             id="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            value={senha}
+            onChange={(e) => setSenha(e.target.value)}
             className={style.inputSenha}
             required
           />
@@ -69,17 +86,27 @@ function LoginForm() {
           {loading ? 'Carregando...' : 'Entrar'}
         </button>
         <div className={style.botoesAuxiliares}>
-          <button type="button" className={style.buttonNovoUsuario} disabled={loading}>
+          <button
+            type="button"
+            className={style.buttonNovoUsuario}
+            disabled={loading}
+            onClick={handleNovoUsuario}
+          >
             {loading ? 'Carregando...' : 'Novo Usuário'}
           </button>
 
-          <button type="button" className={style.buttonEsqueceuSenha} disabled={loading}>
+          <button
+            type="button"
+            className={style.buttonEsqueceuSenha}
+            disabled={loading}
+            onClick={handleEsqueceuSenha}
+          >
             {loading ? 'Carregando...' : 'Esqueceu a senha?'}
           </button>
         </div>
       </form>
 
-      {/* Mensagem de erro */}
+      {/* Exibe erro caso ocorra */}
       {error && <p className={style.error}>{error}</p>}
     </div>
   );

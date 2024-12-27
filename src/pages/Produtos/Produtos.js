@@ -51,7 +51,8 @@ export function Produtos() {
 
     async function carregarProdutos() {
         try {
-            const listaProdutos = await produtoAPI.listarAsync(true);
+            const usuarioId = localStorage.getItem("usuarioId")
+            const listaProdutos = await produtoAPI.listarAsync(true, usuarioId);
             console.log(listaProdutos);
             setProdutos(listaProdutos);
         } catch (error) {

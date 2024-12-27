@@ -13,17 +13,15 @@ export function EditarProduto() {
 
     const [nome, setNome] = useState('');
     const [quantidade, setQuantidade] = useState('');
-    const [tiposCategoria, setTiposCategoria] = useState('');
-    const [categorias, setCategorias] = useState([]);
+    const [categoria, setCategoria] = useState('');
+    const [tiposCategorias, setTiposCategorias] = useState([]);
 
-    const usuarioId = 1;
-// localStorage.setItem("usuarioId",usuarioId )
-// const idi= localStorage.getItem("usuarioId")
+    const usuarioId = localStorage.getItem("usuarioId");
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         if (isFormValid()) {
-            await produtoAPI.atualizarAsync(id, nome, quantidade, tiposCategoria, usuarioId);
+            await produtoAPI.atualizarAsync(id, nome, quantidade, categoria, usuarioId);
             navigate('/produtos')
         } else {
             alert("Por favor, preencha todos os campos.");
@@ -35,7 +33,7 @@ export function EditarProduto() {
         const buscarCategorias = async () => {
             try {
                 const resposta = await produtoAPI.listarTiposCategoriasAsync();
-                setCategorias(resposta);
+                setTiposCategorias(resposta);
             } catch (error) {
                 console.error("Erro ao buscar categorias:", error);
             }
@@ -46,7 +44,7 @@ export function EditarProduto() {
                 const produto = await produtoAPI.obterAsync(id);
                 setNome(produto.nome)
                 setQuantidade(produto.quantidade)
-                setTiposCategoria(produto.tiposCategoria)
+                setCategoria(produto.tiposCategoriasId)
 
             } catch (error) {
                 console.error("Erro ao buscar dados do produto:", error);
@@ -58,7 +56,7 @@ export function EditarProduto() {
     }, []);
 
     const isFormValid = () => {
-        return nome && quantidade && tiposCategoria;
+        return nome && quantidade && categoria;
     };
 
     return (
@@ -95,17 +93,14 @@ export function EditarProduto() {
                         <Form.Label>Categoria</Form.Label>
                         <Form.Control
                             as="select"
-                            name="tiposCategoria"
-                            value={tiposCategoria}
-                            onChange={(e) => setTiposCategoria(e.target.value)}
+                            name="categoria"
+                            value={categoria}
+                            onChange={(e) => setCategoria(e.target.value)}
                             required
                         >
-                            {categorias.map((categoria) => (
-                                <option key={categoria.id} value={categoria.id}>
-                                    {categoria.nome}
-                                </option>
-
-                            ))}
+                            {tiposCategorias.map((tipo) => (
+                                    <option key={tipo.id} value={tipo.id}>{tipo.nome}</option>
+                                ))}
                         </Form.Control>
                     </Form.Group>
 

@@ -17,7 +17,7 @@ export function Topbar({ children }) {
                 <Link to={"/login"} className={style.botao_deslogar}><MdLogout /></Link>
                 </div>
             </div>
-            <div className={style.pagina_conteudo}>
+            <div>
                 {children}
             </div>
         </div>

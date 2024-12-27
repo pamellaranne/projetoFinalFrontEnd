@@ -1,7 +1,8 @@
 .pagina_conteudo {
     width: 100%;
-    height: 100%;
+    height: 100vh;
     padding: 50px;
+    margin-top: 10vh;
     background: linear-gradient(135deg, #f5f7fa, #c3cfe2); 
     font-family: 'Roboto', sans-serif; 
     box-sizing: border-box;

@@ -1,6 +1,15 @@
 .pagina_conteudo{
     width: 100%;
-    height: 100%;
+    height: 100vh;
 
     padding: 50px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+
+.pagina_conteudo h3{
+    margin-bottom: 80px;
 }
