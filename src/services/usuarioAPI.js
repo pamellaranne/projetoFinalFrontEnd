@@ -113,10 +113,13 @@ const usuarioAPI = {
             throw error;
         }
     },
-
     async esqueciMinhaSenha(email) {
         const response = await HTTPClient.post('/usuario/EsqueciMinhaSenha', { email });
         return response.data;
-      }
+    },
+    async redefinirMinhaSenha(token, novaSenha) {
+        const response = await HTTPClient.post("/Usuario/RedefinirMinhaSenha", { token, novaSenha });
+        return response.data;
+    }
 }
 export default usuarioAPI;

@@ -10,6 +10,7 @@ import { Login } from './pages/Login/Login';
 import { Produtos } from './pages/Produtos/Produtos';
 import { RecuperarSenha } from './pages/RecuperarSenha/RecuperarSenha';
 import { Cadastro } from './pages/Cadastro/Cadastro';
+import { RecuperarSenha2 } from './pages/RecuperarSenha2/RecuperarSenha2';
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
         <Route path='/produtos/editar' element={<EditarProduto />} />
         <Route path='/recuperar-senha' element={<RecuperarSenha />} />
         <Route path='/cadastro' element={<Cadastro />} />
+        <Route path='/redefinir-senha' element={<RecuperarSenha2 />} />
       </Routes>
     </BrowserRouter>
   );
